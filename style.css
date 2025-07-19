@@ -5,31 +5,21 @@ body {
   padding: 1rem;
 }
 
-#controls {
+#episodeSearchControls {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem;
-  background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
 }
 
-#searchInput,
-#episodeSelect {
-  padding: 0.5rem;
-  font-size: 1rem;
-  max-width: 300px;
-  width: 100%;
-}
-
-#episodeCount {
-  font-weight: bold;
-  font-size: 1rem;
-  margin-left: auto;
-  white-space: nowrap;
+#searchControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 20px 0;
+  padding: 1rem;
 }
 
 #root {
