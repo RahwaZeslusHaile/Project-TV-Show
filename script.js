@@ -1,8 +1,18 @@
-function setup() {
-  const allEpisodes = getAllEpisodes();
-  populateDropdown(allEpisodes);
-  makePageForEpisodes(allEpisodes);
-
+async function setup() {
+  const root = document.getElementById("root")
+  const loadingMessage = document.createElement("p")
+  loadingMessage.textContent = "Episodes are coming 🏃🏿"
+  root.append(loadingMessage);
+  try{
+    const response = await fetch("https://api.tvmaze.com/shows/82/episodes")
+    if(!response){
+      throw new Error(`HTTP error! status:${response.status}`)
+    }
+    const allEpisodes = await response.json();
+    root.innerHTML = "";
+    populateDropdown(allEpisodes)
+    makePageForEpisodes(allEpisodes)
+ 
   // add event listener for dropdown selection to filter episodes when the event 'change' is triggered
   const dropdown = document.getElementById("episodeDropdown");
   dropdown.addEventListener("change", (event) => {
@@ -11,6 +21,13 @@ function setup() {
 
   // initialise the live search
   liveEpisodeSearch(allEpisodes);
+}catch(error){
+  root.innerHTML = "";
+  const errorMessage = document.createElement("p");
+  errorMessage.textContent = "Failed to load episodes. please try again later";
+  errorMessage.style.backgroundColor = "red"
+  root.appendChild(errorMessage)
+} 
 }
 
 function zeroPad(num) {
