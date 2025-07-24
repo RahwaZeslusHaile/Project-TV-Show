@@ -5,15 +5,6 @@ body {
   padding: 1rem;
 }
 
-#episodeSearchControls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
 #searchControls {
   display: flex;
   align-items: center;
@@ -29,6 +20,36 @@ body {
   justify-content: center;
 }
 
+/* Show cards */
+.show-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.show-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.show-header {
+  padding: 0.75rem;
+  background: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.show-summary {
+  padding: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Episode cards */
 .episode-card {
   background: white;
   border-radius: 8px;
@@ -52,18 +73,17 @@ body {
   text-align: center;
 }
 
-.shadow-box {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-}
-
 .episode-summary {
   padding: 0.75rem;
   font-size: 0.9rem;
+}
+
+.shadow-box {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 footer {
   text-align: center;
   margin-top: 2rem;
   padding: 1rem;
-  font-size: 0.9rem;
-}
+  font-size:

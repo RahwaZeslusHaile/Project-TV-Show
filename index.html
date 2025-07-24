@@ -10,8 +10,12 @@
 
   <body>
     <section id="searchControls">
+      <label for="showsDropdown" class="visually-hidden"></label>
+      <select id="showsDropdown" class="episode-dropdown"></select>
+
       <label for="episodeDropdown" class="visually-hidden"></label>
       <select id="episodeDropdown" class="episode-dropdown"></select>
+      <label for="keywordInput" class="visually-hidden"></label>
       <input
         type="text"
         id="keywordInput"
@@ -23,9 +27,27 @@
 
     <div id="root"></div>
 
-    <!-- Dropdown option template -->
-    <template id="dropdownOptionTemplate">
+    <!-- Dropdown shows template -->
+    <template id="dropdownShowsTemplate">
       <option value=""></option>
+    </template>
+
+    <!-- Dropdown episodes template -->
+    <template id="dropdownEpisodeTemplate">
+      <option value=""></option>
+    </template>
+
+    <!-- Show template -->
+    <template id="showTemplate">
+      <div class="show-card">
+        <a href="#" target="_blank" rel="noopener">
+          <div class="show-header shadow-box">
+            <span class="show-name"></span>
+          </div>
+          <img src="" alt="Show Image" />
+        </a>
+        <div class="show-summary"></div>
+      </div>
     </template>
 
     <!-- Episode template -->
