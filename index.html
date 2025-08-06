@@ -10,12 +10,12 @@
 
   <body>
     <section id="searchControls">
-      <label for="showsDropdown" class="visually-hidden"></label>
+      <label for="showsDropdown" class="visually-hidden">Select a Show</label>
       <select id="showsDropdown" class="episode-dropdown"></select>
 
-      <label for="episodeDropdown" class="visually-hidden"></label>
+      <label for="episodeDropdown" class="visually-hidden">Select an Episode</label>
       <select id="episodeDropdown" class="episode-dropdown"></select>
-      <label for="keywordInput" class="visually-hidden"></label>
+      <label for="keywordInput" class="visually-hidden">Search Episodes</label>
       <input
         type="text"
         id="keywordInput"
@@ -23,6 +23,8 @@
         placeholder="Search by keyword..."
       />
       <span id="episodeCount">Showing all episodes</span>
+      <button id="backToShowsBtn" style="display: none;">← Back to Shows</button>
+
     </section>
 
     <div id="root"></div>

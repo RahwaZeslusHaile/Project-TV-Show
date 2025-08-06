@@ -201,8 +201,8 @@ function renderCards(dataArray, type) {
 
     // handle image for shows/episodes
     if (item.image && item.image.medium) {
-      img.src = item.image.medium;
-      img.alt = `Image from ${item.name}`;
+      img.src = item.image?.medium || "https://via.placeholder.com/210x295?text=No+Image";
+      img.alt = item.name ? `Image from ${item.name}` : "No image available";
     } else {
       img.src = "";
       img.alt = "No image available";
