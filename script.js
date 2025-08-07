@@ -120,8 +120,9 @@ document
         { text: "All Episodes", value: "" },
       ]
     );
-       document.getElementById("backToShowsBtn").style.display = "inline";
  
+        document.getElementById("backToShowsBtn").style.display = "inline";
+
   });
 
 // add an event listener for when the episode dropdown selection changes
@@ -280,6 +281,15 @@ document.getElementById("keywordInput").addEventListener("input", () => {
     episodeCount.textContent = "Showing all episodes";
     renderCards(currentEpisodes, "episode");
   }
+});
+document.getElementById("backToShowsBtn").addEventListener("click", () => {
+  document.getElementById("showsDropdown").value = "";
+  document.getElementById("episodeDropdown").innerHTML = "";
+  document.getElementById("keywordInput").value = "";
+  document.getElementById("episodeCount").textContent = "";
+  currentEpisodes = [];
+  renderCards(Object.values(episodesCache).length ? Object.values(episodesCache).flat() : [], "show");
+  document.getElementById("backToShowsBtn").style.display = "none";
 });
 
 document.getElementById("backToShowsBtn").addEventListener("click", () => {
