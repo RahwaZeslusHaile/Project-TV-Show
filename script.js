@@ -102,6 +102,8 @@ document
         { text: "All Episodes", value: "" },
       ]
     );
+        document.getElementById("backToShowsBtn").style.display = "inline";
+
   });
 
 // add an event listener for when the episode dropdown selection changes
@@ -201,8 +203,8 @@ function renderCards(dataArray, type) {
 
     // handle image for shows/episodes
     if (item.image && item.image.medium) {
-      img.src = item.image.medium;
-      img.alt = `Image from ${item.name}`;
+      img.src = item.image?.medium || "https://via.placeholder.com/210x295?text=No+Image";
+      img.alt = item.name ? `Image from ${item.name}` : "No image available";
     } else {
       img.src = "";
       img.alt = "No image available";
@@ -247,6 +249,15 @@ document.getElementById("keywordInput").addEventListener("input", () => {
     episodeCount.textContent = "Showing all episodes";
     renderCards(currentEpisodes, "episode");
   }
+});
+document.getElementById("backToShowsBtn").addEventListener("click", () => {
+  document.getElementById("showsDropdown").value = "";
+  document.getElementById("episodeDropdown").innerHTML = "";
+  document.getElementById("keywordInput").value = "";
+  document.getElementById("episodeCount").textContent = "";
+  currentEpisodes = [];
+  renderCards(Object.values(episodesCache).length ? Object.values(episodesCache).flat() : [], "show");
+  document.getElementById("backToShowsBtn").style.display = "none";
 });
 
 window.onload = setup;

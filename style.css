@@ -86,4 +86,12 @@ footer {
   text-align: center;
   margin-top: 2rem;
   padding: 1rem;
-  font-size:
+  font-size: 1rem
+}
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
