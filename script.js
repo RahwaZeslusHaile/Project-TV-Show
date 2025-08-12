@@ -7,7 +7,7 @@ let allShows = null;
 
 async function setup() {
   const root = document.getElementById("root");
-  root.innerHTML = "TVMaze data is coming 🏃🏿";
+  root.textContent = "TVMaze data is coming 🏃🏿";
 
   try {
     // fetch all the shows
@@ -20,9 +20,7 @@ async function setup() {
 
 
     // sort the shows in alphabetical order by name in place (it modifies the original array)
-    allShows.sort((a, b) =>
-      a.name.localeCompare(b.name, undefined, { sensitivity: "base" })
-    );
+    
 
     // render all shows as cards
     renderCards(allShows, "show");
@@ -40,6 +38,9 @@ async function setup() {
     );
     document.getElementById("keywordInput").addEventListener("input", (event) => {
   const keyword = event.target.value.toLowerCase();
+  const showSelected = !!document.getElementById("showsDropdown").value;
+
+  if (!showSelected) {
   const filteredShows = allShows.filter((show) => {
     const nameMatch = show.name.toLowerCase().includes(keyword);
     const summaryMatch = (show.summary || "").toLowerCase().includes(keyword);
@@ -51,9 +52,35 @@ async function setup() {
   renderCards(filteredShows, "show");
 
   document.getElementById("episodeCount").textContent = `Found ${filteredShows.length} shows`;
+  document.getElementById("episodeDropdown").value = "";
+  document.getElementById("episodeDropdown").innerHTML = "";
+}else{
+   const filteredEpisodes = currentEpisodes.filter((ep) => {
+          const nameMatch = ep.name.toLowerCase().includes(keyword);
+          // Sanitize summary for searching (remove HTML tags)
+          const summaryText = ep.summary ? ep.summary.replace(/<\/?[^>]+(>|$)/g, "").toLowerCase() : "";
+          const summaryMatch = summaryText.includes(keyword);
+          return nameMatch || summaryMatch;
+        });
+
+        renderCards(filteredEpisodes, "episode");
+        document.getElementById("episodeCount").textContent = `Displaying ${filteredEpisodes.length} of ${currentEpisodes.length} episodes`;
+      }
+
+      if (keyword === "") {
+        // Reset to all shows or all episodes depending on context
+        if (!showSelected) {
+          renderCards(allShows, "show");
+          document.getElementById("episodeCount").textContent = `Found ${allShows.length} shows`;
+        } else {
+          renderCards(currentEpisodes, "episode");
+          document.getElementById("episodeCount").textContent = "Showing all episodes";
+        }
+}
 });
 
   } catch (error) {
+
     root.innerHTML = "Failed to load TVMaze data. Please try again later.";
     console.error("Error fetching shows:", error);
   }
@@ -219,6 +246,7 @@ function renderCards(dataArray, type) {
     const img = clone.querySelector("img");
 
     anchor.href = item.url;
+    anchor.setAttribute("tabindex", "0");
 
     // handle image for shows/episodes
     if (item.image && item.image.medium) {
@@ -249,7 +277,7 @@ function renderCards(dataArray, type) {
     } else {
       clone.querySelector(".episode-name-and-code").textContent =
         getEpisodeLabel(item);
-      clone.querySelector(".episode-summary").innerHTML = item.summary;
+      clone.querySelector(".episode-summary").textContent = item.summary;
     }
 
     root.appendChild(clone);
